@@ -19,7 +19,7 @@ const HuongDan = () => {
         <h2 className="title">Hướng dẫn nạp tiền</h2>
         <Typography component="ul">
           <li>Vui lòng quét mã QR hoặc nhập thông tin chuyển khoản đến ngân hàng ở trên.</li>
-          <li>Số tiền nạp tối thiểu 100$</li>
+          <li>Số tiền nạp tối thiểu {convertJSXMoney(MIN_MONEY_DEPOSIT)}$</li>
           <li>Vui lòng ghi đúng nội dung chuyển khoản là tên đăng nhập của bạn</li>
           <li>Tiền sẽ được cộng vào tài khoản của bạn trong vòng vài phút. Nếu không, hãy liên hệ CSKH</li>
         </Typography>
