@@ -8,7 +8,7 @@ const STATUS_DEPOSIT = {
   SUCCESS: "hoanTat",
   CANCEL: "daHuy",
 };
-const MIN_MONEY_DEPOSIT = 1;
+const MIN_MONEY_DEPOSIT = 100;
 
 Object.freeze(LOAI_DEPOSIT);
 Object.freeze(STATUS_DEPOSIT);
