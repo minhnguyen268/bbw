@@ -21,11 +21,11 @@ const HuongDan = () => {
         <h2 className="title">Hướng dẫn rút tiền</h2>
         <Typography component="ul">
           <li>
-            Nếu chưa có mật khẩu rút tiền, thì click <Link href="/password-withdraw">tại đây</Link> để tiến hành cài đặt
+            Nếu chưa có mật khẩu rút tiền, thì click <Link href="/password-withdraw">TẠI ĐÂY</Link> để tiến hành cài đặt
             mật khẩu
           </li>
           <li>Nhập số tiền và chọn ngân hàng muốn rút.</li>
-          <li>Số tiền rút tối thiểu 500,000.</li>
+          <li>Số tiền rút tối thiểu 100$.</li>
           <li>Tiền sẽ tự động vào tài khoản trong vòng 1 phút, nếu thấy lâu có thể liên hệ bộ phận hỗ trợ.</li>
         </Typography>
       </Box>
