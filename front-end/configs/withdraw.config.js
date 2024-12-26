@@ -1,6 +1,6 @@
 export const ADMIN_LIST_WITHDRAW_HISTORY_PAGE_SIZE = 10;
 
-export const MIN_MONEY_WITHDRAW = 10000;
+export const MIN_MONEY_WITHDRAW = 100;
 
 export const TINH_TRANG_WITHDRAW_HISTORY = {
   DANG_CHO: "dangCho",
