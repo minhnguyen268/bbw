@@ -3,7 +3,7 @@ const STATUS_WITHDRAW = {
   SUCCESS: "hoanTat",
   CANCEL: "daHuy",
 };
-const MIN_MONEY_WITHDRAW = 1;
+const MIN_MONEY_WITHDRAW = 100;
 Object.freeze(STATUS_WITHDRAW);
 module.exports = {
   STATUS_WITHDRAW,
