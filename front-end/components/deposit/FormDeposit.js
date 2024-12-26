@@ -51,7 +51,7 @@ const FormNap = ({ selectedBank }) => {
       await new Promise((resolve) => {
         setTimeout(() => {
           resolve();
-        }, 100);
+        }, 1);
       });
       setSrcVietQR(
         `https://img.vietqr.io/image/${selectedBank.code}-${selectedBank.soTaiKhoan}-compact2.png?amount=${soTien}&addInfo=SAND79%20${session.user.taiKhoan}&accountName=${selectedBank.tenChuTaiKhoan}`
