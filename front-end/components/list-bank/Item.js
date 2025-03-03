@@ -1,6 +1,17 @@
 import { Box, Typography } from "@mui/material";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import ContentCopyIcon from "@mui/icons-material/ContentCopy";
+import { toast } from "react-toastify";
+import { useState } from "react";
 
 const Item = ({ item }) => {
+  const [show, setShow] = useState(false);
+  const masked =
+    item.soTaiKhoan.length <= 5
+      ? "".padStart(item.soTaiKhoan.length, "*")
+      : `${item.soTaiKhoan.slice(0, item.soTaiKhoan.length - 5)}*****`;
+
   return (
     <>
       <Box
@@ -34,7 +45,38 @@ const Item = ({ item }) => {
               fontSize: "2.5rem",
             }}
           >
-            {item.soTaiKhoan}
+            {show ? item.soTaiKhoan : masked}
+            {/* {!show && (
+              <VisibilityIcon
+                sx={{
+                  fontSize: "2rem",
+                  marginLeft: "1.5rem",
+                  cursor: "pointer",
+                }}
+                onClick={() => setShow(!show)}
+              />
+            )}
+            {show && (
+              <VisibilityOffIcon
+                sx={{
+                  fontSize: "2rem",
+                  marginLeft: "1.5rem",
+                  cursor: "pointer",
+                }}
+                onClick={() => setShow(!show)}
+              />
+            )}
+            <ContentCopyIcon
+              sx={{
+                fontSize: "2rem",
+                marginLeft: "1.2rem",
+                cursor: "pointer",
+              }}
+              onClick={() => {
+                navigator.clipboard.writeText(item.soTaiKhoan);
+                toast.success("Copy thành công");
+              }}
+            /> */}
           </Typography>
         </Box>
         <Box
