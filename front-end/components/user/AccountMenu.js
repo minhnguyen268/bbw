@@ -51,11 +51,11 @@ const listMenu = [
     title: "Đổi mật khẩu",
     url: "/password",
   },
-  {
-    icon: <PhoneIcon />,
-    title: "Đổi số điện thoại",
-    url: "/phone",
-  },
+  // {
+  //   icon: <PhoneIcon />,
+  //   title: "Đổi số điện thoại",
+  //   url: "/phone",
+  // },
   {
     icon: <LogoutOutlinedIcon />,
     title: "Đăng xuất",
