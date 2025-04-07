@@ -10,4 +10,7 @@ router.route("/:id").delete(authController.protect, authController.reStrictTo("a
 router.route("/").get(authController.protect, authController.reStrictTo("admin"), AdminController.getDanhSachNganHang);
 router.route("/").post(authController.protect, authController.reStrictTo("admin"), AdminController.createNganHang);
 
+router.route("/user/:id").put(authController.protect, authController.reStrictTo("admin"), AdminController.editNganHangUser);
+router.route("/user/:id").delete(authController.protect, authController.reStrictTo("admin"), AdminController.deleteNganHangUser);
+
 module.exports = router;
