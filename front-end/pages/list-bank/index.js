@@ -33,24 +33,26 @@ const Home = () => {
             color: (theme) => theme.palette.text.secondary,
           }}
         >
-          <Box
-            sx={{
-              paddingTop: "1rem",
-              textAlign: "center",
-            }}
-          >
-            <Link href="/list-bank/add">
-              <Button>Thêm tài khoản ngân hàng</Button>
-            </Link>
-          </Box>
           {data?.metadata?.results === 0 && (
-            <Typography
-              sx={{
-                textAlign: "center",
-              }}
-            >
-              Hiện chưa có ngân hàng
-            </Typography>
+            <>
+              <Box
+                sx={{
+                  paddingTop: "1rem",
+                  textAlign: "center",
+                }}
+              >
+                <Link href="/list-bank/add">
+                  <Button>Thêm tài khoản ngân hàng</Button>
+                </Link>
+              </Box>
+              <Typography
+                sx={{
+                  textAlign: "center",
+                }}
+              >
+                Hiện chưa có ngân hàng
+              </Typography>
+            </>
           )}
 
           <Box
