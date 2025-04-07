@@ -12,29 +12,30 @@ import { Controller, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import * as Yup from "yup";
 
-const FormBank = ({ data, handleOnSubmit }) => {
+const FormBank = ({ data, handleOnSubmit, handleCancel, isEditingUserBank }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   // form validation rules
   const validationSchema = Yup.object().shape({
-    tenChuTaiKhoan: Yup.string()
-      .required("Vui lòng nhập tên chủ tài khoản")
-      .trim("Tên chủ tài khoản không hợp lệ")
-      .strict(true),
+    tenChuTaiKhoan: isEditingUserBank
+      ? undefined
+      : Yup.string().required("Vui lòng nhập tên chủ tài khoản").trim("Tên chủ tài khoản không hợp lệ").strict(true),
     soTaiKhoan: Yup.string().required("Vui lòng nhập số tài khoản").trim("Số tài khoản không hợp lệ").strict(true),
     status: Yup.boolean(),
-    code: Yup.string()
-      .required("Vui lòng nhập bank code")
-      .trim("Bank code không hợp lệ")
-      .test(
-        "is-valid",
-        (value) => `${value} không hợp lệ`,
-        (value) => {
-          const findBankByCode = listBank.find((item) => item.code === value);
-          return !!findBankByCode;
-        }
-      )
-      .strict(true),
+    code: isEditingUserBank
+      ? undefined
+      : Yup.string()
+          .required("Vui lòng nhập bank code")
+          .trim("Bank code không hợp lệ")
+          .test(
+            "is-valid",
+            (value) => `${value} không hợp lệ`,
+            (value) => {
+              const findBankByCode = listBank.find((item) => item.code === value);
+              return !!findBankByCode;
+            }
+          )
+          .strict(true),
   });
   const formOptions = { resolver: yupResolver(validationSchema) };
 
@@ -57,6 +58,7 @@ const FormBank = ({ data, handleOnSubmit }) => {
       });
 
       toast.success(results?.data?.message);
+      if (handleCancel) handleCancel();
     } catch (err) {
       toast.error(err?.response?.data?.message);
     } finally {
@@ -110,6 +112,7 @@ const FormBank = ({ data, handleOnSubmit }) => {
                 />
               )}
               defaultValue={data?.tenChuTaiKhoan ?? ""}
+              disabled={isEditingUserBank}
             />
             <ErrorMessageLabel>{errors.tenChuTaiKhoan ? errors.tenChuTaiKhoan.message : ""}</ErrorMessageLabel>
           </FormControl>
@@ -140,63 +143,80 @@ const FormBank = ({ data, handleOnSubmit }) => {
             <ErrorMessageLabel>{errors.soTaiKhoan ? errors.soTaiKhoan.message : ""}</ErrorMessageLabel>
           </FormControl>
 
-          <FormControl fullWidth>
-            <Typography>Tình trạng</Typography>
-            <Controller
-              name="status"
-              control={control}
-              render={({ field: { ref, ...field } }) => (
-                <Select
-                  labelId="select-status"
-                  id="select-status-option"
-                  label="Status"
-                  input={<OptionMenu />}
-                  error={errors.status ? true : false}
-                  inputRef={ref}
-                  {...field}
-                >
-                  {Object.values(TINH_TRANG_LIST_BANK).map((item, i) => (
-                    <OptionMenuItem key={i} value={item}>
-                      {convertTinhTrangListBank(item)}
-                    </OptionMenuItem>
-                  ))}
-                </Select>
-              )}
-              defaultValue={data?.status ?? true}
-            />
-          </FormControl>
-          <FormControl fullWidth>
-            <Typography>Ngân hàng</Typography>
-            <Controller
-              name="code"
-              control={control}
-              render={({ field: { ref, ...field } }) => (
-                <Select
-                  labelId="select-code"
-                  id="select-code-option"
-                  label="code"
-                  input={<OptionMenu />}
-                  error={errors.code ? true : false}
-                  inputRef={ref}
-                  {...field}
-                >
-                  {listBank.map((item, i) => (
-                    <OptionMenuItem key={i} value={item.code}>
-                      {item.shortName} - {item.name}
-                    </OptionMenuItem>
-                  ))}
-                </Select>
-              )}
-              defaultValue={data?.code ?? true}
-            />
-            <ErrorMessageLabel>{errors.code ? errors.code.message : ""}</ErrorMessageLabel>
-          </FormControl>
+          {!isEditingUserBank && (
+            <FormControl fullWidth>
+              <Typography>Tình trạng</Typography>
+              <Controller
+                name="status"
+                control={control}
+                render={({ field: { ref, ...field } }) => (
+                  <Select
+                    labelId="select-status"
+                    id="select-status-option"
+                    label="Status"
+                    input={<OptionMenu />}
+                    error={errors.status ? true : false}
+                    inputRef={ref}
+                    {...field}
+                  >
+                    {Object.values(TINH_TRANG_LIST_BANK).map((item, i) => (
+                      <OptionMenuItem key={i} value={item}>
+                        {convertTinhTrangListBank(item)}
+                      </OptionMenuItem>
+                    ))}
+                  </Select>
+                )}
+                defaultValue={data?.status ?? true}
+              />
+            </FormControl>
+          )}
+          {!isEditingUserBank && (
+            <FormControl fullWidth>
+              <Typography>Ngân hàng</Typography>
+              <Controller
+                name="code"
+                control={control}
+                render={({ field: { ref, ...field } }) => (
+                  <Select
+                    labelId="select-code"
+                    id="select-code-option"
+                    label="code"
+                    input={<OptionMenu />}
+                    error={errors.code ? true : false}
+                    inputRef={ref}
+                    {...field}
+                  >
+                    {listBank.map((item, i) => (
+                      <OptionMenuItem key={i} value={item.code}>
+                        {item.shortName} - {item.name}
+                      </OptionMenuItem>
+                    ))}
+                  </Select>
+                )}
+                defaultValue={data?.code ?? true}
+              />
+              <ErrorMessageLabel>{errors.code ? errors.code.message : ""}</ErrorMessageLabel>
+            </FormControl>
+          )}
 
           <Box
             sx={{
               textAlign: "center",
             }}
           >
+            {handleCancel && (
+              <Button
+                variant="outlined"
+                onClick={() => {
+                  handleCancel();
+                }}
+                sx={{
+                  marginRight: "1rem",
+                }}
+              >
+                Hủy
+              </Button>
+            )}
             <Button type="submit" onClick={handleSubmit(onSubmit)}>
               Xác nhận
             </Button>
