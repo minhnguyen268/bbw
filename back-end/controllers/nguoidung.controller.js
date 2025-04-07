@@ -76,7 +76,7 @@ class NguoiDungController {
       throw new BadRequestError("Mã giới thiệu không đúng");
     }
 
-    if (!taiKhoan || !matKhau || !nhapLaiMatKhau || !soDienThoai) {
+    if (!taiKhoan || !matKhau || !nhapLaiMatKhau) {
       throw new UnauthorizedError("Vui lòng nhập đầy đủ thông tin");
     }
     const checkUserExist = await NguoiDung.findOne({
@@ -110,7 +110,6 @@ class NguoiDungController {
   });
 
   static signInUser = catchAsync(async (req, res, next) => {
-    console.log(req.body);
     const { taiKhoan, matKhau } = req.body;
     if (!taiKhoan || !matKhau) {
       throw new UnauthorizedError("Vui lòng nhập đầy đủ thông tin");
@@ -205,7 +204,6 @@ class NguoiDungController {
     const { taiKhoan } = req.user;
     const { phone } = req.body;
 
-    console.log(phone);
     // Update user
     await NguoiDung.findOneAndUpdate(
       {
