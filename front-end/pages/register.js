@@ -46,11 +46,11 @@ const DangKy = () => {
       .matches(/^\S*$/, "Nhập lại mật khẩu không hợp lệ")
       .oneOf([Yup.ref("password"), null], "Mật khẩu không khớp với nhau")
       .strict(true),
-    phone: Yup.string()
-      .required("Vui lòng nhập số điện thoại")
-      .trim("Số điện thoại không hợp lệ")
-      .matches(/^0\d{9,10}$/, "Số điện thoại không hợp lệ")
-      .strict(true),
+    // phone: Yup.string()
+    //   .required("Vui lòng nhập số điện thoại")
+    //   .trim("Số điện thoại không hợp lệ")
+    //   .matches(/^0\d{9,10}$/, "Số điện thoại không hợp lệ")
+    //   .strict(true),
   });
   const formOptions = { resolver: yupResolver(validationSchema) };
 
@@ -217,7 +217,7 @@ const DangKy = () => {
             <ErrorMessageLabel>{errors.confirmPassword ? errors.confirmPassword.message : ""}</ErrorMessageLabel>
           </FormControl>
 
-          <FormControl
+          {/* <FormControl
             sx={{
               display: "flex",
               flexDirection: "column",
@@ -240,7 +240,7 @@ const DangKy = () => {
               defaultValue=""
             />
             <ErrorMessageLabel>{errors.phone ? errors.phone.message : ""}</ErrorMessageLabel>
-          </FormControl>
+          </FormControl> */}
 
           <FormControl
             sx={{
