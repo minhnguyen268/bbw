@@ -20,6 +20,14 @@ class BankService {
     const res = await api.post(`/v1/admin/ngan-hang`, data);
     return res;
   };
+  static updateBankUser = async ({ id, data }) => {
+    const res = await api.put(`/v1/admin/ngan-hang/user/${id}`, data);
+    return res;
+  };
+  static deleteBankUser = async ({ id }) => {
+    const res = await api.delete(`/v1/admin/ngan-hang/user/${id}`);
+    return res;
+  };
 }
 
 export default BankService;
