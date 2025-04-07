@@ -33,7 +33,7 @@ const nguoiDungSchema = new mongoose.Schema(
     soDienThoai: {
       type: String,
       trim: true,
-      required: [true, "Vui lòng nhập số điện thoại"],
+      // required: [true, "Vui lòng nhập số điện thoại"],
     },
     matKhauRutTien: {
       type: String,
